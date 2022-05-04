@@ -1,0 +1,58 @@
+## Base de datos
+CREATE DATABASE db_concesionario
+
+## Tabla clientes
+
+CREATE TABLE clientes(
+	Id_cliente INT AUTO_INCREMENT PRIMARY KEY, 
+	Nombre VARCHAR(50),
+	Apellido VARCHAR(50),
+	identificador VARCHAR(5));
+
+INSERT INTO clientes (Nombre, Apellido, identificador) VALUES
+('Ana', 'Lopez', "123abc"),
+('Lulu', 'Mondragon', "123def"),
+('Raul', 'Sanchez', "456abc"),
+('Miguel', 'Miranda', "456def"),
+('Dolores', 'Quinones', "123xyz"),
+('Jimena', 'Arteaga', "456xyz")
+
+## Tabla vehiculos
+
+CREATE vehiculos (
+	Id_vehiculo INT AUTO_INCREMENT PRIMARY KEY, 
+	Marca VARCHAR(50),
+	Valor VARCHAR(10),
+	Modelo VARCHAR(50),
+	Anio int (4));
+
+INSERT INTO vehiculos (Marca, Valor, Modelo, Anio) VALUES
+('Alpha Romeo', '$22000', 'Brero', 2010),
+('Alpha Romeo', '$15000', 'Brero', 2011),
+('Audi', '$62000', 'R8', 2005),
+('Audi', '$28000', 'Sport quattro', 2019),
+('Chevrolet', '$52000','Camaro', 2020),
+('Ford', '$62000', 'Mustang', 1970),
+('Ford', '$52000', 'Mustang', 1980),
+('Ford', '$82000', 'Wagon', 2019);
+
+
+## Tabla vendedores
+CREATE TABLE vendedores (
+	Id_vendedor INT AUTO_INCREMENT PRIMARY KEY, 
+	Nombre VARCHAR(50),
+	Id_vehiculo INT,
+	Id_cliente INT);
+
+INSERT INTO vendedores(Nombre, Id_vehiculo, Id_cliente) VALUES
+('José', 1, 2),
+('Anaís', 2, 4),
+('Miguel', 4, 1),
+('Lulú', 6, 5);
+
+## filtro vendedor
+select v.Nombre, vh.Marca, c.Nombre from vendedores as v
+INNER JOIN
+vehiculos as vh ON v.Id_vehiculo = vh.Id_vehiculo
+INNER JOIN
+clientes as c ON v.Id_cliente = c.Id_cliente
